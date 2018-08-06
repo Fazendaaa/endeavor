@@ -1,12 +1,9 @@
 import { IncomingMessage } from 'http';
 import { request } from 'https';
-
-export type gql = string;
-
-export type graphql = string;
+import { DocumentNode } from 'graphql';
 
 export interface GraphQLData {
-    query: string | gql | graphql;
+    query: string | DocumentNode;
     variables?: object;
 }
 

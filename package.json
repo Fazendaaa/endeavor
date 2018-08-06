@@ -25,6 +25,7 @@
     },
     "homepage": "https://github.com/Fazendaaa/endeavor#readme",
     "devDependencies": {
+        "@types/graphql": "^0.13.4",
         "@types/jest": "^23.3.1",
         "@types/node": "^10.5.6",
         "jest": "^23.4.2",
