@@ -1,6 +1,6 @@
 {
     "name": "endeavor",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "A Node package written in TypeScript that consumes the new Anilist API",
     "main": "./dist/main.js",
     "types": "./dist/main.d.ts",
