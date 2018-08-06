@@ -2,8 +2,10 @@ ci
 coverage
 examples
 node_modules
+others
 src
 .gitignore
+.synk
 .travis.yml
 jest.config.json
 tsconfig.json
