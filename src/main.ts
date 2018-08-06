@@ -1,8 +1,12 @@
 import { IncomingMessage } from 'http';
 import { request } from 'https';
 
+export type gql = string;
+
+export type graphql = string;
+
 export interface GraphQLData {
-    query: string;
+    query: string | gql | graphql;
     variables?: object;
 }
 
