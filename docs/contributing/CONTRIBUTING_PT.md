@@ -2,7 +2,7 @@
 
 <div align = "center">
     <br>
-    <img src="./others/img/logo/logo.png" height=260>
+    <img src="../../others/img/logo/logo.png" height=260>
     <br>
     <br>
 
@@ -18,21 +18,3 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/Fazendaaa/endeavor/badge.svg)](https://snyk.io/test/github/Fazendaaa/endeavor)
 
 </div>
-
-## About
-
-A Node package written in TypeScript that consumes the new Anilist API
-
-# How to use it?
-
-# Code
-
-## Testing it
-
-# Built with
-
-# Authors
-
-# Contributing
-
-# License

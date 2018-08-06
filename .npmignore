@@ -1,0 +1,10 @@
+ci
+coverage
+examples
+node_modules
+src
+.gitignore
+.travis.yml
+jest.config.json
+tsconfig.json
+tslint.json
