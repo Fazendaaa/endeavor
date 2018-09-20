@@ -1,9 +1,11 @@
-import { fetchData } from '../../src/main';
+import { fetchAnilist } from '../../src/main';
 
-describe('fetchData testing.', () => {
+jest.setTimeout(10000);
+
+describe('fetchAnilist testing.', () => {
     test('Fetching an example in the docs.', async () => {
-        const query = 'query ($id: Int) { # Define which variables will be used in the query (id)\n\
-            Media (id: $id, type: ANIME) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)\n\
+        const query = 'query ($id: Int) {\n\
+            Media (id: $id, type: ANIME) {\n\
                 id\n\
                 title {\n\
                     romaji\n\
@@ -28,14 +30,12 @@ describe('fetchData testing.', () => {
             }
         };
 
-        expect.assertions(1);
-
-        expect(await fetchData({ query, variables })).toEqual(output);
+        return expect(fetchAnilist({ query, variables })).resolves.toEqual(output);
     });
 
-    test('Fetching wrong argument.', () => {
-        const query = 'query ($id: Int) { # Define which variables will be used in the query (id)\n\
-            Media (id: $id, type: ANIME) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)\n\
+    test('Fetching wrong argument.', async () => {
+        const query = 'query ($id: Int) {\n\
+            Media (id: $id, type: ANIME) {\n\
                 id\n\
                 title {\n\
                     romaji\n\
@@ -46,9 +46,52 @@ describe('fetchData testing.', () => {
             }\n\
         }';
         const variables = {
-            id: 15125
+            id: -1
+        };
+        const output = {
+            data: null,
+            errors: [
+                {
+                    locations: [
+                        {
+                            line: 8,
+                            column: 21
+                        }
+                    ],
+                    message: "Cannot query field \"portuguese\" on type \"MediaTitle\".",
+                    status: 400,
+                },
+            ],
         };
 
-        expect(fetchData({ query, variables })).rejects.toThrow();
+        return expect(fetchAnilist({ query, variables })).rejects.toEqual(output);
+    });
+
+    test('Fetching missing argument.', async () => {
+        const query = 'query ($id: Int) {\n\
+            Media (id: $id, type: ANIME) {\n\
+                id\n\
+                title {\n\
+                    romaji\n\
+                    native\n\
+                    english\n\
+                }\n\
+            }\n\
+        }';
+        const variables = {};
+        const output = {
+            data: {
+                Media: {
+                    id: 1,
+                    title: {
+                        romaji: "Cowboy Bebop",
+                        native: "カウボーイビバップ",
+                        english: "Cowboy Bebop"
+                    }
+                }
+            }
+        };
+
+        return expect(fetchAnilist({ query, variables })).resolves.toEqual(output);
     });
 });

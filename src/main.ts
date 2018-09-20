@@ -25,23 +25,22 @@ export interface AnilistError {
     }
 }
 
-const handleResponse = (resolve: (data: object) => void, reject: (data: Error) => void, response: IncomingMessage): void => {
+const handleResponse = (resolve: (data: object) => void, reject: (data: AnilistError) => void, response: IncomingMessage): void => {
     let chunk = '';
     const { statusCode } = response;
 
-    if (200 !== statusCode) {
-        reject(new Error('Error: status 200'));
-    }
-
-    response
-        .setEncoding('utf8')
+    response.setEncoding('utf8')
         .on('error', reject)
         .on('uncaughtException', reject)
         .on('data', (data: string) => chunk += data)
-        .on('end', () => resolve(JSON.parse(chunk)));
+        .on('end', () => {
+            const result = JSON.parse(chunk);
+
+            (200 !== statusCode) ? reject(result) : resolve(result);
+        });
 };
 
-export const fetchData = (search: GraphQLData): Promise<object | Error> => new Promise((resolve: (data: object) => void, reject: (data: Error) => void) => {
+export const fetchAnilist = (search: GraphQLData): Promise<object> => new Promise((resolve: (data: object) => void, reject: (data: Error | AnilistError) => void) => {
     const post = request({
         method: 'POST',
         rejectUnauthorized: false,
@@ -53,8 +52,10 @@ export const fetchData = (search: GraphQLData): Promise<object | Error> => new P
     });
     const curriedHandleResponse = ((response: IncomingMessage) => handleResponse(resolve, reject, response));
 
-    post.on('error', reject);
-    post.on('response', curriedHandleResponse);
     post.write(JSON.stringify(search));
+    post.on('error', () => reject(new Error('Request error')));
+    post.on('response', curriedHandleResponse);
     post.end();
 });
+
+export default fetchAnilist;
