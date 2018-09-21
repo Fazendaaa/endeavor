@@ -1,41 +1,42 @@
 {
+    "snyk": true,
+    "license": "MIT",
     "name": "endeavor",
     "version": "2.2.0",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "author": "https://github.com/Fazendaaa/",
+    "homepage": "https://github.com/Fazendaaa/endeavor#readme",
     "description": "A Node package written in TypeScript that consumes the new Anilist API",
-    "main": "./dist/main.js",
-    "types": "./dist/main.d.ts",
-    "scripts": {
-        "build": "tsc",
-        "test": "snyk test && npm run jest",
-        "watch": "tsc --watch",
-        "jest": "jest --config jest.config.json --ci --runInBand --detectOpenHandles --forceExit --no-cache"
+    "dependencies": {},
+    "bugs": {
+        "url": "https://github.com/Fazendaaa/endeavor/issues"
     },
+    "keywords": [
+        "api",
+        "anilist",
+        "graphql"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Fazendaaa/endeavor.git"
     },
-    "keywords": [
-        "api",
-        "anilist"
-    ],
-    "author": "https://github.com/Fazendaaa/",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/Fazendaaa/endeavor/issues"
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc --watch",
+        "test": "snyk test && npm run jest",
+        "jest": "jest --config jest.config.json --ci --runInBand --detectOpenHandles --forceExit --no-cache"
     },
-    "homepage": "https://github.com/Fazendaaa/endeavor#readme",
     "devDependencies": {
-        "@types/graphql": "^0.13.4",
-        "@types/jest": "^23.3.1",
-        "@types/node": "^10.5.6",
-        "codecov": "^3.1.0",
-        "jest": "^23.4.2",
-        "snyk": "^1.90.0",
-        "ts-jest": "^23.1.2",
+        "jest": "^23.6.0",
+        "snyk": "^1.96.0",
         "tslint": "^5.11.0",
-        "tslint-immutable": "^4.6.0",
-        "typescript": "^2.9.2"
-    },
-    "dependencies": {},
-    "snyk": true
+        "codecov": "^3.1.0",
+        "ts-jest": "^23.10.1",
+        "typescript": "^2.9.2",
+        "@types/jest": "^23.3.2",
+        "@types/node": "^10.10.1",
+        "@types/graphql": "^0.13.4",
+        "tslint-microsoft-contrib": "^5.2.1"
+    }
 }

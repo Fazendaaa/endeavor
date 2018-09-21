@@ -2,7 +2,7 @@ ci
 coverage
 examples
 node_modules
-others
+others/img/logo/logo.svg
 src
 .gitignore
 .synk

@@ -1,8 +1,8 @@
-import { fetchAnilist } from '../../src/main';
+import { queryAnilist } from '../../src/index';
 
 jest.setTimeout(10000);
 
-describe('fetchAnilist testing.', () => {
+describe('queryAnilist testing.', () => {
     test('Fetching an example in the docs.', async () => {
         const query = 'query ($id: Int) {\n\
             Media (id: $id, type: ANIME) {\n\
@@ -22,15 +22,15 @@ describe('fetchAnilist testing.', () => {
                 Media: {
                     id: 15125,
                     title: {
-                        english: "Teekyuu",
-                        native: "てーきゅう",
-                        romaji: "Teekyuu"
+                        english: 'Teekyuu',
+                        native: 'てーきゅう',
+                        romaji: 'Teekyuu'
                     }
                 }
             }
         };
 
-        return expect(fetchAnilist({ query, variables })).resolves.toEqual(output);
+        return expect(queryAnilist({ query, variables })).resolves.toEqual(output);
     });
 
     test('Fetching wrong argument.', async () => {
@@ -58,13 +58,13 @@ describe('fetchAnilist testing.', () => {
                             column: 21
                         }
                     ],
-                    message: "Cannot query field \"portuguese\" on type \"MediaTitle\".",
-                    status: 400,
-                },
-            ],
+                    message: 'Cannot query field \"portuguese\" on type \"MediaTitle\".',
+                    status: 400
+                }
+            ]
         };
 
-        return expect(fetchAnilist({ query, variables })).rejects.toEqual(output);
+        return expect(queryAnilist({ query, variables })).rejects.toEqual(output);
     });
 
     test('Fetching missing argument.', async () => {
@@ -84,14 +84,14 @@ describe('fetchAnilist testing.', () => {
                 Media: {
                     id: 1,
                     title: {
-                        romaji: "Cowboy Bebop",
-                        native: "カウボーイビバップ",
-                        english: "Cowboy Bebop"
+                        romaji: 'Cowboy Bebop',
+                        native: 'カウボーイビバップ',
+                        english: 'Cowboy Bebop'
                     }
                 }
             }
         };
 
-        return expect(fetchAnilist({ query, variables })).resolves.toEqual(output);
+        return expect(queryAnilist({ query, variables })).resolves.toEqual(output);
     });
 });
