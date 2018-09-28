@@ -260,18 +260,6 @@ export interface FollowingNotification {
     readonly type: NotificationType;
 }
 
-export interface ThreadLikeNotification {
-    readonly id: number;
-    readonly user: User;
-    readonly thread: Thread;
-    readonly userId: number;
-    readonly context: string;
-    readonly threadId: number;
-    readonly createdAt: number;
-    readonly type: NotificationType;
-    readonly comment: ThreadComment;
-}
-
 interface ActivityBase {
     readonly id: number;
     readonly user: User;
@@ -319,6 +307,10 @@ interface ThreadBase {
     readonly type: NotificationType;
     readonly comment: ThreadComment;
 };
+
+export interface ThreadLikeNotification extends ThreadBase {
+    readonly threadId: number;
+}
 
 export interface ThreadCommentLikeNotification extends ThreadBase { }
 
