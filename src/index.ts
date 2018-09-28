@@ -189,12 +189,12 @@ export interface AnilistError {
     data: null;
     errors: {
         status: number;
+        score: string[];
         message: string;
         locations: ErrorPosition[];
         validation: {
             id: string[];
         };
-        score: string[];
     };
 }
 
@@ -223,21 +223,6 @@ export interface ListActivity {
     readonly createdAt: number;
     readonly type: ActivityType;
     readonly replyCount: number;
-    readonly replies: ActivityReply[];
-}
-
-export interface MessageActivity {
-    readonly id: number;
-    readonly likes: User[];
-    readonly message: string;
-    readonly siteUrl: string;
-    readonly recipient: User;
-    readonly messenger: User;
-    readonly createdAt: number;
-    readonly type: ActivityType;
-    readonly replyCount: number;
-    readonly recipientId: number;
-    readonly messengerId: number;
     readonly replies: ActivityReply[];
 }
 
@@ -913,7 +898,10 @@ export interface Thread {
     readonly categories: ThreadCategory[];
 }
 
-const handleResponse = (resolve: (data: object) => void, reject: (data: AnilistError) => void, response: IncomingMessage): void => {
+export type AnilistResponse = Media |
+                              User;
+
+const handleResponse = (resolve: (data: AnilistResponse) => void, reject: (data: AnilistError) => void, response: IncomingMessage): void => {
     let chunk = '';
     const { statusCode } = response;
 
@@ -928,8 +916,8 @@ const handleResponse = (resolve: (data: object) => void, reject: (data: AnilistE
         });
 };
 
-export const queryAnilist = (search: AnilistGraphQL): Promise<object> => {
-    return new Promise((resolve: (data: object) => void, reject: (data: Error | AnilistError) => void) => {
+export const queryAnilist = (search: AnilistGraphQL): Promise<AnilistResponse> => {
+    return new Promise((resolve: (data: AnilistResponse) => void, reject: (data: Error | AnilistError) => void) => {
         const post = request({
             method: 'POST',
             rejectUnauthorized: false,
