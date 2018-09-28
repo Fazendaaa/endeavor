@@ -272,11 +272,14 @@ export interface ThreadLikeNotification {
     readonly comment: ThreadComment;
 }
 
-export interface ActivityLikeNotification {
+interface ActivityBase {
     readonly id: number;
     readonly user: User;
     readonly userId: number;
     readonly context: string;
+}
+
+export interface ActivityLikeNotification extends ActivityBase {
     readonly createdAt: number;
     readonly activityId: number;
     readonly type: NotificationType;
@@ -293,55 +296,42 @@ export interface ActivityReply {
     readonly activityId: number;
 }
 
-export interface ActivityReplyNotification {
-    readonly id: number;
-    readonly user: User;
-    readonly userId: number;
-    readonly context: string;
+export interface ActivityReplyNotification extends ActivityBase {
     readonly createdAt: number;
     readonly activityId: number;
     readonly type: NotificationType;
     readonly activity: ActivityUnion;
 }
 
-export interface ActivityMessageNotification {
-    readonly id: number;
-    readonly user: User;
-    readonly userId: number;
-    readonly context: string;
+export interface ActivityMessageNotification extends ActivityBase {
     readonly createdAt: number;
     readonly activityId: number;
     readonly type: NotificationType;
     readonly message: MessageActivity;
 }
 
-export interface ActivityMentionNotification {
-    readonly id: number;
-    readonly user: User;
-    readonly userId: number;
-    readonly context: string;
+export interface ActivityMentionNotification extends ActivityBase {
     readonly createdAt: number;
     readonly activityId: number;
     readonly type: NotificationType;
     readonly activity: ActivityUnion;
 }
 
-export interface ActivityReplyLikeNotification {
-    readonly id: number;
-    readonly user: User;
-    readonly userId: number;
-    readonly context: string;
+export interface ActivityReplyLikeNotification extends ActivityBase {
     readonly createdAt: number;
     readonly activityId: number;
     readonly type: NotificationType;
     readonly activity: ActivityUnion;
 }
 
-export interface ThreadCommentLikeNotification {
+interface ThreadBase {
     readonly id: number;
     readonly user: User;
     readonly thread: Thread;
     readonly userId: number;
+};
+
+export interface ThreadCommentLikeNotification extends ThreadBase {
     readonly context: string;
     readonly createdAt: number;
     readonly commentId: number;
@@ -349,11 +339,7 @@ export interface ThreadCommentLikeNotification {
     readonly comment: ThreadComment;
 }
 
-export interface ThreadCommentReplyNotification {
-    readonly id: number;
-    readonly user: User;
-    readonly thread: Thread;
-    readonly userId: number;
+export interface ThreadCommentReplyNotification extends ThreadBase {
     readonly context: string;
     readonly createdAt: number;
     readonly commentId: number;
@@ -361,11 +347,7 @@ export interface ThreadCommentReplyNotification {
     readonly comment: ThreadComment;
 }
 
-export interface ThreadCommentMentionNotification {
-    readonly id: number;
-    readonly user: User;
-    readonly thread: Thread;
-    readonly userId: number;
+export interface ThreadCommentMentionNotification extends ThreadBase {
     readonly context: string;
     readonly createdAt: number;
     readonly commentId: number;
@@ -373,11 +355,7 @@ export interface ThreadCommentMentionNotification {
     readonly comment: ThreadComment;
 }
 
-export interface ThreadCommentSubscribedNotification {
-    readonly id: number;
-    readonly user: User;
-    readonly thread: Thread;
-    readonly userId: number;
+export interface ThreadCommentSubscribedNotification extends ThreadBase {
     readonly context: string;
     readonly createdAt: number;
     readonly commentId: number;
