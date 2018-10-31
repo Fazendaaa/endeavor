@@ -1,0 +1,14 @@
+query ($userId: Int) {
+    User (id: $userId) {
+        id
+        name
+        about
+        stats{
+		activityHistory{
+		date
+		level
+		amount
+	     }
+	}
+    }
+}
