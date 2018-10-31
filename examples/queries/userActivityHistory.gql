@@ -4,11 +4,11 @@ query ($userId: Int) {
         name
         about
         stats{
-			activityHistory{
-				date
-				level
-				amount
-			}
-		}
+		activityHistory{
+		date
+		level
+		amount
+	     }
+	}
     }
 }
