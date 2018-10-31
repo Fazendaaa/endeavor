@@ -3,10 +3,12 @@ query ($userId: Int) {
         id
         name
         about
-        activityHistory {
-            date
-            level
-            amount
-        }
+        stats{
+			activityHistory{
+				date
+				level
+				amount
+			}
+		}
     }
 }
