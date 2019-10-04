@@ -1,0 +1,23 @@
+query {
+	Media(status: NOT_YET_RELEASED) {
+    title {
+      romaji
+      english
+      native
+      userPreferred
+    }
+    relations {
+      edges {
+        relationType(version: 2)
+      }
+      nodes {
+        title {
+      		romaji
+      		english
+      		native
+      		userPreferred
+        }
+      }
+    }
+  }
+}

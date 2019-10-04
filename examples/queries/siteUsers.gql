@@ -1,0 +1,13 @@
+query {
+  SiteStatistics {
+    users {
+      edges {
+        node {
+          date
+          count
+          change
+        }
+      }
+    }
+  }
+}

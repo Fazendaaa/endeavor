@@ -1,0 +1,13 @@
+query {
+  SiteStatistics {
+    reviews {
+      edges {
+        node {
+          date
+          count
+          change
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
 query ($search: String, $type: MediaType) {
-    Media (search: $search, type: $type) {
-        id
-        title {
-            romanji
-            english
-            native
-        }
+  Media (search: $search, type: $type) {
+    id
+    title {
+      romanji
+      english
+      native
     }
+  }
 }
